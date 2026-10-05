@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import include, path
 from django.views.generic import RedirectView
 
 from accounts import views as account_views
@@ -9,6 +9,7 @@ from accounts import views as account_views
 urlpatterns = [
     path("", RedirectView.as_view(pattern_name="dashboard", permanent=False), name="home"),
     path("admin/", admin.site.urls),
+    path("documents/", include("documents.urls")),
     path(
         "login/",
         auth_views.LoginView.as_view(
