@@ -14,6 +14,9 @@
                 <div class="d-flex flex-wrap align-items-center gap-3 ms-auto">
                     <a class="text-white text-decoration-none" href="{% url 'dashboard' %}">Dashboard</a>
                     <a class="text-white text-decoration-none" href="{% url 'document_list' %}">Tài liệu</a>
+                    {% if request.user.profile.role == "admin" %}
+                        <a class="text-white text-decoration-none" href="{% url 'user_list' %}">Người dùng</a>
+                    {% endif %}
                     <a class="text-white text-decoration-none" href="{% url 'profile' %}">Hồ sơ cá nhân</a>
                     <span class="text-white-50">{{ request.user.get_username }}</span>
                     <form method="post" action="{% url 'logout' %}" class="m-0">
