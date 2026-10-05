@@ -10,6 +10,9 @@
         {% if can_edit %}
             <a class="btn btn-primary" href="{% url 'document_edit' document.pk %}">Sửa tài liệu</a>
         {% endif %}
+        {% if can_delete %}
+            <a class="btn btn-outline-danger" href="{% url 'document_delete' document.pk %}">Xóa tài liệu</a>
+        {% endif %}
     </div>
 </div>
 
