@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -78,10 +79,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
+demo_sqlite_path = os.environ.get("KLCN85_SQLITE_PATH")
+if demo_sqlite_path:
+    database_path = Path(demo_sqlite_path).expanduser()
+    if not database_path.is_absolute():
+        database_path = BASE_DIR / database_path
+else:
+    database_path = BASE_DIR / "db.sqlite3"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': database_path,
     }
 }
 
